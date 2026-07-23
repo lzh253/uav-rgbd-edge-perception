@@ -1,0 +1,12 @@
+metric,pearson_with_path_safety,n_model_threshold_points
+mean_map_iou,0.4983783387826007,360
+mean_false_positive_rate,-0.4344550516006026,360
+mean_false_negative_rate,0.5014603795248199,360
+mean_largest_fp_component_ratio_image,-0.38866982873612205,360
+mean_pred_start_component_fp_fraction,-0.5162947059907071,360
+mean_path_false_positive_fraction_found,-0.7922719534895951,360
+mean_path_corridor_fp_rate_found,-0.7325307646581949,360
+mean_collision_bridge_component_area_ratio_image_found,-0.36318573048477837,360
+collision_rate_among_found,-0.9091978195320493,360
+start_or_goal_blocked_rate,0.6380539602311407,360
+path_aware_score,0.9870212010862502,360

@@ -1,0 +1,6 @@
+model,architecture,mode,trainable_parameters,best_epoch,best_val_iou,test_iou,checkpoint_size_mb,astar_path_found,astar_success,astar_collision_found,astar_safety_utility,dijkstra_safety_utility,selected_sample_map_iou,mean_inference_ms,interpretation
+rgb_baseline,SmallUNet,rgb,1927009,8,0.475670,0.567792,7.396,0.425197,0.248031,0.416667,0.070866,0.062992,0.606566,3.748,"Original compact RGB baseline."
+rgbd_concat_baseline,SmallUNet,rgbd,1927297,5,0.474544,0.557960,7.397,0.450787,0.261811,0.419214,0.072835,0.053150,0.571400,3.808,"Original naive RGB-D input-concatenation baseline."
+semantic_clean,DualBranchSemanticCommNet,rgbd,2803857,6,0.699834,0.649140,10.772,0.370079,0.277559,0.250000,0.185039,0.173228,0.626820,5.259,"Original compact semantic bottleneck; 16x value compression."
+dual_fusion_no_bottleneck,DualBranchFusionNoBottleneck,rgbd,2795393,13,0.711266,0.566869,10.739,0.370079,0.226378,0.388298,0.082677,0.070866,0.641378,5.085,"New controlled RGB-D fusion baseline without semantic bottleneck."
+deeplabv3_resnet50_rgb,DeepLabV3-ResNet50,rgb,39633729,1,0.504513,0.525815,151.534,0.655512,0.427165,0.348348,0.198819,0.194882,0.540312,10.263,"New modern RGB segmentation architecture baseline trained from scratch."

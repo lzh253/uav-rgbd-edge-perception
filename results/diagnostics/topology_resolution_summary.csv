@@ -1,0 +1,3 @@
+split,samples,mean_topology_iou_ref_up_vs_target,median_topology_iou_ref_up_vs_target,mean_lost_target_road_fraction,median_lost_target_road_fraction,mean_extra_ref_road_fraction_vs_target,eligible_at_reference,eligible_at_target,eligible_at_both,target_more_components_than_ref_up,ref_up_more_components_than_target
+test,648,0.9676448527821458,0.9697691637112968,0.017718363346311567,0.016210198231316666,0.015545216743469035,508,509,508,139,32
+val,265,0.9438541599887371,0.9701742037656168,0.029578112524482364,0.016302588996763755,0.033027046880739805,194,189,189,98,25
