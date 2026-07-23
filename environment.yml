@@ -1,0 +1,19 @@
+name: uav-rgbd-edge
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - pandas
+  - matplotlib
+  - scikit-image
+  - scikit-learn
+  - pillow
+  - tqdm
+  - pip:
+      - opencv-python
+      - torch
+      - torchvision

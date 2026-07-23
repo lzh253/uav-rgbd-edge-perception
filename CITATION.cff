@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this code or protocol, please cite the associated article."
+title: "Bandwidth-Constrained RGB-D Edge Perception with Bit-Level Link and Task-Topology Evaluation for UAV-to-Ground Traversability Mapping"
+type: software
+version: 1.0.0
+date-released: 2026-07-24
+authors:
+  - family-names: Liu
+    given-names: Ziheng
+    orcid: "https://orcid.org/0009-0008-7899-1568"
+  - family-names: Li
+    given-names: Yao
+    orcid: "https://orcid.org/0009-0006-8126-034X"
+  - family-names: Jia
+    given-names: Yong
+    orcid: "https://orcid.org/0000-0003-3165-3349"
+  - family-names: Lin
+    given-names: Fanqiang
+    orcid: "https://orcid.org/0000-0003-4884-1944"
+  - family-names: Wang
+    given-names: Zhengning
+    orcid: "https://orcid.org/0000-0003-4218-164X"
+repository-code: "https://github.com/lzh253/uav-rgbd-edge-perception"
+url: "https://github.com/lzh253/uav-rgbd-edge-perception"
+license: "LicenseRef-Proprietary"

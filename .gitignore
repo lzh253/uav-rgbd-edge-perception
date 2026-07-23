@@ -1,0 +1,32 @@
+# Local data and generated artifacts
+AeroScapes/
+data/
+depth_raw/
+baselines/
+semantic_comm_runs/
+path_planning_runs/
+path_aware_runs/
+calibration_runs/
+planner_runs/
+outputs/
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.aux
+*.out
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
