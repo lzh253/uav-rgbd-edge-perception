@@ -1,0 +1,118 @@
+{
+  "run_name": "planner_robustness_v1",
+  "description": "Planner robustness checks for selected checkpoints, covering A*/Dijkstra, 4/8-neighbor grids, footprint erosion, and start-goal distance sensitivity.",
+  "source_model_config": "configs/path_planning_threshold_sweep.json",
+  "threshold_csv": "outputs/path_planning_runs/path_planning_threshold_sweep_v1/selected_safety_threshold_test_summary.csv",
+  "split": "test",
+  "image_size": 128,
+  "max_samples": 0,
+  "seed": 20260623,
+  "model_names": [
+    "oracle_gt",
+    "rgb_baseline",
+    "rgbd_concat_baseline",
+    "semantic_clean"
+  ],
+  "settings": [
+    {
+      "name": "nominal_astar8",
+      "planner": "astar",
+      "connectivity": 8,
+      "footprint_radius": 0,
+      "min_gt_component_pixels": 300,
+      "min_start_goal_distance": 32
+    },
+    {
+      "name": "dijkstra8",
+      "planner": "dijkstra",
+      "connectivity": 8,
+      "footprint_radius": 0,
+      "min_gt_component_pixels": 300,
+      "min_start_goal_distance": 32
+    },
+    {
+      "name": "astar4",
+      "planner": "astar",
+      "connectivity": 4,
+      "footprint_radius": 0,
+      "min_gt_component_pixels": 300,
+      "min_start_goal_distance": 32
+    },
+    {
+      "name": "dijkstra4",
+      "planner": "dijkstra",
+      "connectivity": 4,
+      "footprint_radius": 0,
+      "min_gt_component_pixels": 300,
+      "min_start_goal_distance": 32
+    },
+    {
+      "name": "astar8_start16",
+      "planner": "astar",
+      "connectivity": 8,
+      "footprint_radius": 0,
+      "min_gt_component_pixels": 300,
+      "min_start_goal_distance": 16
+    },
+    {
+      "name": "astar8_start24",
+      "planner": "astar",
+      "connectivity": 8,
+      "footprint_radius": 0,
+      "min_gt_component_pixels": 300,
+      "min_start_goal_distance": 24
+    },
+    {
+      "name": "astar8_start48",
+      "planner": "astar",
+      "connectivity": 8,
+      "footprint_radius": 0,
+      "min_gt_component_pixels": 300,
+      "min_start_goal_distance": 48
+    },
+    {
+      "name": "astar8_start64",
+      "planner": "astar",
+      "connectivity": 8,
+      "footprint_radius": 0,
+      "min_gt_component_pixels": 300,
+      "min_start_goal_distance": 64
+    },
+    {
+      "name": "astar8_footprint_r1",
+      "planner": "astar",
+      "connectivity": 8,
+      "footprint_radius": 1,
+      "min_gt_component_pixels": 300,
+      "min_start_goal_distance": 32
+    },
+    {
+      "name": "astar8_footprint_r2",
+      "planner": "astar",
+      "connectivity": 8,
+      "footprint_radius": 2,
+      "min_gt_component_pixels": 300,
+      "min_start_goal_distance": 32
+    },
+    {
+      "name": "dijkstra8_footprint_r1",
+      "planner": "dijkstra",
+      "connectivity": 8,
+      "footprint_radius": 1,
+      "min_gt_component_pixels": 300,
+      "min_start_goal_distance": 32
+    },
+    {
+      "name": "astar4_footprint_r1",
+      "planner": "astar",
+      "connectivity": 4,
+      "footprint_radius": 1,
+      "min_gt_component_pixels": 300,
+      "min_start_goal_distance": 32
+    }
+  ],
+  "outputs": {
+    "root": "outputs/planner_robustness",
+    "report": "outputs/planner_robustness/summary.md"
+  }
+}

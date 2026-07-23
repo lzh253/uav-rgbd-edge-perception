@@ -1,0 +1,82 @@
+{
+  "run_name": "strict_l8_digital_link_v1",
+  "description": "Bit-level 8-bit payload serialization with uncoded BPSK over AWGN, hard decisions, empirical BER, and downstream route-safety evaluation.",
+  "protocol_config": "configs/experiment_protocol.json",
+  "training_config": "configs/strict_bottleneck_training.json",
+  "checkpoint": "checkpoints/strict_l8_validation_selected_model.pth",
+  "output_root": "outputs/digital_link_v1",
+  "device": "cuda",
+  "seed": 20260723,
+  "image_size": 128,
+  "batch_size": 1,
+  "selection_split": "val",
+  "final_split": "test",
+  "thresholds": [0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75],
+  "connectivity": 8,
+  "min_gt_component_pixels": 300,
+  "min_start_goal_distance": 32,
+  "link_rates_mbps": [1, 5, 10],
+  "profiles": [
+    {
+      "name": "clean_float32",
+      "label": "Float32 reference",
+      "mode": "clean",
+      "repeats": 1
+    },
+    {
+      "name": "q8_ideal",
+      "label": "8-bit ideal link",
+      "mode": "q8",
+      "repeats": 1
+    },
+    {
+      "name": "q8_bpsk_ebn0_0",
+      "label": "BPSK 0 dB",
+      "mode": "bpsk_awgn",
+      "ebn0_db": 0,
+      "repeats": 3
+    },
+    {
+      "name": "q8_bpsk_ebn0_2",
+      "label": "BPSK 2 dB",
+      "mode": "bpsk_awgn",
+      "ebn0_db": 2,
+      "repeats": 3
+    },
+    {
+      "name": "q8_bpsk_ebn0_4",
+      "label": "BPSK 4 dB",
+      "mode": "bpsk_awgn",
+      "ebn0_db": 4,
+      "repeats": 3
+    },
+    {
+      "name": "q8_bpsk_ebn0_6",
+      "label": "BPSK 6 dB",
+      "mode": "bpsk_awgn",
+      "ebn0_db": 6,
+      "repeats": 3
+    },
+    {
+      "name": "q8_bpsk_ebn0_8",
+      "label": "BPSK 8 dB",
+      "mode": "bpsk_awgn",
+      "ebn0_db": 8,
+      "repeats": 3
+    },
+    {
+      "name": "q8_rep3_ebn0_0",
+      "label": "BPSK 0 dB + repetition-3",
+      "mode": "bpsk_awgn_rep3",
+      "ebn0_db": 0,
+      "repeats": 3
+    },
+    {
+      "name": "q8_rep3_ebn0_2",
+      "label": "BPSK 2 dB + repetition-3",
+      "mode": "bpsk_awgn_rep3",
+      "ebn0_db": 2,
+      "repeats": 3
+    }
+  ]
+}

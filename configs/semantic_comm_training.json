@@ -1,0 +1,56 @@
+{
+  "run_family": "rgbd_semantic_comm_v1",
+  "description": "Structured RGB-D semantic communication model: dual-branch RGB/depth encoder, compact semantic tensor, simulated transmission, and traversability-grid decoder.",
+  "image_size": 128,
+  "batch_size": 24,
+  "num_epochs": 60,
+  "learning_rate": 0.0002,
+  "weight_decay": 0.00001,
+  "base_channels": 32,
+  "latent_channels": 16,
+  "num_workers": 0,
+  "seed": 20260516,
+  "threshold": 0.5,
+  "early_stopping_patience": 14,
+  "early_stopping_min_delta": 0.001,
+  "variants": [
+    {
+      "name": "clean",
+      "quant_bits": 0,
+      "noise_std": 0.0,
+      "dropout_prob": 0.0
+    },
+    {
+      "name": "quant8",
+      "quant_bits": 8,
+      "noise_std": 0.0,
+      "dropout_prob": 0.0
+    },
+    {
+      "name": "noise05",
+      "quant_bits": 8,
+      "noise_std": 0.05,
+      "dropout_prob": 0.0
+    },
+    {
+      "name": "dropout10",
+      "quant_bits": 8,
+      "noise_std": 0.0,
+      "dropout_prob": 0.1
+    }
+  ],
+  "loss": {
+    "name": "BCEWithLogitsLoss",
+    "pos_weight": "auto_from_train_split"
+  },
+  "depth_normalization": {
+    "type": "per_image_percentile",
+    "lower_percentile": 1,
+    "upper_percentile": 99
+  },
+  "outputs": {
+    "root": "outputs/semantic_comm_runs",
+    "save_best_metric": "val_iou",
+    "save_prediction_previews": 12
+  }
+}

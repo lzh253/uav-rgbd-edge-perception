@@ -1,0 +1,53 @@
+{
+  "run_name": "electronics_strict_l8_stable_v1",
+  "description": "Three independent seeds with joint aerial-view geometric augmentation and a reduced learning rate.",
+  "protocol_config": "configs/experiment_protocol.json",
+  "output_root": "outputs/strict_l8_stable_v1",
+  "image_size": 128,
+  "batch_size": 24,
+  "num_workers": 0,
+  "num_epochs": 80,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.00005,
+  "base_channels": 32,
+  "threshold": 0.5,
+  "seed": 20260723,
+  "deterministic": true,
+  "gradient_clip_norm": 1.0,
+  "scheduler_factor": 0.5,
+  "scheduler_patience": 5,
+  "early_stopping_patience": 18,
+  "early_stopping_min_delta": 0.001,
+  "loss": "bce_dice",
+  "dice_weight": 0.5,
+  "pos_weight_samples": 0,
+  "preview_count": 6,
+  "augmentation": {
+    "enabled": true,
+    "horizontal_flip_probability": 0.5,
+    "vertical_flip_probability": 0.5,
+    "random_rot90": true
+  },
+  "depth_normalization": {
+    "type": "per_image_percentile",
+    "lower_percentile": 1,
+    "upper_percentile": 99
+  },
+  "variants": [
+    {
+      "name": "strict_l8_stable_seed23",
+      "latent_channels": 8,
+      "seed": 20260723
+    },
+    {
+      "name": "strict_l8_stable_seed24",
+      "latent_channels": 8,
+      "seed": 20260724
+    },
+    {
+      "name": "strict_l8_stable_seed25",
+      "latent_channels": 8,
+      "seed": 20260725
+    }
+  ]
+}

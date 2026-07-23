@@ -1,0 +1,54 @@
+{
+  "run_family": "strong_baselines_v1",
+  "description": "Controlled dual-branch RGB-D fusion and DeepLabV3-ResNet50 RGB baselines trained under the fixed AeroScapes protocol.",
+  "image_size": 128,
+  "batch_size": 16,
+  "num_epochs": 60,
+  "learning_rate": 0.0002,
+  "weight_decay": 0.00001,
+  "base_channels": 32,
+  "num_workers": 0,
+  "seed": 20260624,
+  "threshold": 0.5,
+  "early_stopping_patience": 14,
+  "early_stopping_min_delta": 0.001,
+  "deterministic": false,
+  "cudnn_benchmark": true,
+  "gradient_clip_norm": 1.0,
+  "scheduler_factor": 0.5,
+  "scheduler_patience": 4,
+  "models": [
+    {
+      "name": "dual_fusion_no_bottleneck",
+      "architecture": "dual_fusion_no_bottleneck",
+      "mode": "rgbd",
+      "batch_size": 16,
+      "num_epochs": 60,
+      "learning_rate": 0.0002,
+      "description": "Controlled RGB-D dual-branch fusion baseline that removes the 16 x 16 x 16 semantic bottleneck while keeping comparable RGB/depth branch encoders and decoder skips."
+    },
+    {
+      "name": "deeplabv3_resnet50_rgb",
+      "architecture": "deeplabv3_resnet50_rgb",
+      "mode": "rgb",
+      "batch_size": 8,
+      "num_epochs": 40,
+      "learning_rate": 0.0001,
+      "description": "Modern DeepLabV3-ResNet50 RGB segmentation architecture baseline, trained from scratch without external weights to preserve the fixed dataset protocol."
+    }
+  ],
+  "loss": {
+    "name": "BCEWithLogitsLoss",
+    "pos_weight": "auto_from_train_split"
+  },
+  "depth_normalization": {
+    "type": "per_image_percentile",
+    "lower_percentile": 1,
+    "upper_percentile": 99
+  },
+  "outputs": {
+    "root": "outputs/strong_baseline_runs",
+    "save_best_metric": "val_iou",
+    "save_prediction_previews": 12
+  }
+}

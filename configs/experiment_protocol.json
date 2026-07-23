@@ -1,0 +1,38 @@
+{
+  "protocol_name": "aeroscapes_road_only_traversability_v1",
+  "description": "Fixed AeroScapes protocol for binary road-traversability experiments. Class 10 is treated as passable road; all other label ids are non-passable.",
+  "dataset_root": "data/AeroScapes",
+  "rgb_dir": "JPEGImages",
+  "label_dir": "SegmentationClass",
+  "label_visualization_dir": "Visualizations",
+  "depth_preview_dir": "DepthImages",
+  "image_sets_dir": "ImageSets",
+  "official_train_file": "trn.txt",
+  "official_val_file": "val.txt",
+  "outputs_root": "outputs",
+  "passable_class_ids": [10],
+  "non_passable_policy": "all_label_ids_except_passable_are_non_passable",
+  "class_0_note": "Label id 0 appears as black background/unlabeled in visualization. It is not treated as passable in this protocol.",
+  "protocol_split": {
+    "test_source": "official_val_file",
+    "validation_source": "group_split_from_official_train_file",
+    "validation_group_fraction": 0.15,
+    "random_seed": 20260515,
+    "group_id_rule": "sample id prefix before the first underscore, e.g. 000001_070 -> 000001"
+  },
+  "preview": {
+    "samples_per_split": 4,
+    "image_width": 320,
+    "mask_alpha": 0.45
+  },
+  "depth_generation": {
+    "model_name": "depth-anything/DA3-LARGE-1.1",
+    "process_res": 504,
+    "process_res_method": "upper_bound_resize",
+    "output_dir": "depth_raw",
+    "npy_dir": "npy",
+    "png16_dir": "png16",
+    "preview_dir": "preview",
+    "note": "Use .npy float32 depth as the authoritative RGB-D training input. The 16-bit PNG and preview PNG are convenience artifacts only."
+  }
+}

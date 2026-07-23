@@ -1,0 +1,42 @@
+{
+  "run_name": "electronics_strict_l8_multiseed_v1",
+  "description": "Independent-seed stability runs for the validation-selected strict 8-channel bottleneck.",
+  "protocol_config": "configs/experiment_protocol.json",
+  "output_root": "outputs/strict_l8_multiseed_v1",
+  "image_size": 128,
+  "batch_size": 24,
+  "num_workers": 0,
+  "num_epochs": 60,
+  "learning_rate": 0.0002,
+  "weight_decay": 0.00001,
+  "base_channels": 32,
+  "threshold": 0.5,
+  "seed": 20260724,
+  "deterministic": true,
+  "gradient_clip_norm": 1.0,
+  "scheduler_factor": 0.5,
+  "scheduler_patience": 4,
+  "early_stopping_patience": 14,
+  "early_stopping_min_delta": 0.001,
+  "loss": "bce_dice",
+  "dice_weight": 0.5,
+  "pos_weight_samples": 0,
+  "preview_count": 6,
+  "depth_normalization": {
+    "type": "per_image_percentile",
+    "lower_percentile": 1,
+    "upper_percentile": 99
+  },
+  "variants": [
+    {
+      "name": "strict_l8_seed24",
+      "latent_channels": 8,
+      "seed": 20260724
+    },
+    {
+      "name": "strict_l8_seed25",
+      "latent_channels": 8,
+      "seed": 20260725
+    }
+  ]
+}

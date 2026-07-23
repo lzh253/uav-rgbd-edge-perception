@@ -1,0 +1,30 @@
+{
+  "run_family": "strict_rgb_depth_long_baselines_v1",
+  "description": "Long-run strict train/val/test baselines for road-only traversability prediction. Use this for paper-level convergence checks.",
+  "image_size": 128,
+  "batch_size": 32,
+  "num_epochs": 100,
+  "learning_rate": 0.0002,
+  "weight_decay": 0.00001,
+  "base_channels": 32,
+  "num_workers": 0,
+  "seed": 20260516,
+  "threshold": 0.5,
+  "early_stopping_patience": 18,
+  "early_stopping_min_delta": 0.001,
+  "modes": ["rgb", "depth", "rgbd"],
+  "loss": {
+    "name": "BCEWithLogitsLoss",
+    "pos_weight": "auto_from_train_split"
+  },
+  "depth_normalization": {
+    "type": "per_image_percentile",
+    "lower_percentile": 1,
+    "upper_percentile": 99
+  },
+  "outputs": {
+    "root": "outputs/baselines",
+    "save_best_metric": "val_iou",
+    "save_prediction_previews": 12
+  }
+}

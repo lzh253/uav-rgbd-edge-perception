@@ -1,0 +1,47 @@
+{
+  "run_name": "electronics_strict_bottleneck_v1",
+  "description": "Strict no-skip RGB-D bottleneck training. The receiver-side decoder can access only the transmitted latent tensor.",
+  "protocol_config": "configs/experiment_protocol.json",
+  "output_root": "outputs/strict_bottleneck_v1",
+  "image_size": 128,
+  "batch_size": 24,
+  "num_workers": 0,
+  "num_epochs": 60,
+  "learning_rate": 0.0002,
+  "weight_decay": 0.00001,
+  "base_channels": 32,
+  "threshold": 0.5,
+  "seed": 20260723,
+  "deterministic": true,
+  "gradient_clip_norm": 1.0,
+  "scheduler_factor": 0.5,
+  "scheduler_patience": 4,
+  "early_stopping_patience": 14,
+  "early_stopping_min_delta": 0.001,
+  "loss": "bce_dice",
+  "dice_weight": 0.5,
+  "pos_weight_samples": 0,
+  "preview_count": 8,
+  "depth_normalization": {
+    "type": "per_image_percentile",
+    "lower_percentile": 1,
+    "upper_percentile": 99
+  },
+  "variants": [
+    {
+      "name": "strict_l8_seed23",
+      "latent_channels": 8,
+      "seed": 20260723
+    },
+    {
+      "name": "strict_l16_seed23",
+      "latent_channels": 16,
+      "seed": 20260723
+    },
+    {
+      "name": "strict_l32_seed23",
+      "latent_channels": 32,
+      "seed": 20260723
+    }
+  ]
+}

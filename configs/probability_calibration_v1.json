@@ -1,0 +1,27 @@
+{
+  "run_name": "probability_calibration_v1",
+  "description": "Pixel-level probability calibration and threshold-transfer diagnosis for path-planning models.",
+  "source_model_config": "configs/path_planning_checkpoint_selection.json",
+  "path_planning_safety_csv": "outputs/path_planning_runs/path_planning_checkpoint_selection_v1/checkpoint_model_safety_summary_enriched.csv",
+  "splits": ["val", "test"],
+  "image_size": 128,
+  "batch_size": 24,
+  "num_workers": 0,
+  "calibration_bins": 15,
+  "score_bins": 400,
+  "thresholds": [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95],
+  "selection_split": "val",
+  "final_split": "test",
+  "outputs": {
+    "root": "outputs/calibration_runs",
+    "report": "outputs/calibration_runs/probability_calibration_v1/summary.md"
+  },
+  "plot_models": [
+    "rgb_baseline_best",
+    "rgbd_concat_baseline_best",
+    "semantic_clean_step4_single_best",
+    "semantic_original_recipe_seed20260516_last",
+    "semantic_stable_v2_lr2e4_clip10_seed20260517_best",
+    "semantic_stable_v2_lr2e4_clip10_seed20260517_last"
+  ]
+}

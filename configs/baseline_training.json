@@ -1,0 +1,30 @@
+{
+  "run_family": "strict_rgb_depth_baselines_v1",
+  "description": "Strict train/val/test baselines for road-only traversability prediction using RGB-only, Depth-only, and RGB-D inputs.",
+  "image_size": 128,
+  "batch_size": 32,
+  "num_epochs": 20,
+  "learning_rate": 0.0003,
+  "weight_decay": 0.00001,
+  "base_channels": 32,
+  "num_workers": 0,
+  "seed": 20260516,
+  "threshold": 0.5,
+  "early_stopping_patience": 0,
+  "early_stopping_min_delta": 0.0,
+  "modes": ["rgb", "depth", "rgbd"],
+  "loss": {
+    "name": "BCEWithLogitsLoss",
+    "pos_weight": "auto_from_train_split"
+  },
+  "depth_normalization": {
+    "type": "per_image_percentile",
+    "lower_percentile": 1,
+    "upper_percentile": 99
+  },
+  "outputs": {
+    "root": "outputs/baselines",
+    "save_best_metric": "val_iou",
+    "save_prediction_previews": 8
+  }
+}

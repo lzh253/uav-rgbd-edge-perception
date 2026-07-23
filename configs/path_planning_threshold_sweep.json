@@ -1,0 +1,70 @@
+{
+  "run_name": "path_planning_threshold_sweep_v1",
+  "description": "Validation-driven threshold sensitivity analysis for closed-loop A* path planning on predicted traversability grids.",
+  "splits": ["val", "test"],
+  "image_size": 128,
+  "thresholds": [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75],
+  "selection_split": "val",
+  "final_split": "test",
+  "selection_metric": "success_rate_collision_free",
+  "safety_selection_metric": "planning_safety_utility",
+  "safety_selection_metric_definition": "success_rate_collision_free - (path_found_rate - success_rate_collision_free); rewards collision-free paths and penalizes found paths that collide.",
+  "selection_tie_breakers": ["path_found_rate", "mean_map_iou", "negative_collision_rate_among_found"],
+  "min_gt_component_pixels": 300,
+  "min_start_goal_distance": 32,
+  "connectivity": 8,
+  "max_samples_per_split": 0,
+  "seed": 20260517,
+  "outputs": {
+    "root": "outputs/path_planning_runs"
+  },
+  "models": [
+    {
+      "name": "oracle_gt",
+      "type": "oracle",
+      "description": "A* on ground-truth traversability mask; upper-bound reference."
+    },
+    {
+      "name": "rgb_baseline",
+      "type": "baseline",
+      "mode": "rgb",
+      "checkpoint": "outputs/baselines/strict_baselines_long_cuda_v1/rgb/checkpoints/best_model.pth",
+      "description": "Strict RGB-only baseline from step 3."
+    },
+    {
+      "name": "rgbd_concat_baseline",
+      "type": "baseline",
+      "mode": "rgbd",
+      "checkpoint": "outputs/baselines/strict_baselines_long_cuda_v1/rgbd/checkpoints/best_model.pth",
+      "description": "Strict RGB-D concatenation baseline from step 3."
+    },
+    {
+      "name": "semantic_clean",
+      "type": "semantic",
+      "variant": "clean",
+      "checkpoint": "outputs/semantic_comm_runs/semantic_comm_v1/clean/checkpoints/best_model.pth",
+      "description": "Clean RGB-D semantic bottleneck from step 4."
+    },
+    {
+      "name": "semantic_quant8_ft",
+      "type": "semantic",
+      "variant": "quant8",
+      "checkpoint": "outputs/semantic_comm_runs/semantic_comm_v1_channel_finetune/quant8/checkpoints/best_model.pth",
+      "description": "64x 8-bit semantic tensor after clean initialized channel fine-tuning."
+    },
+    {
+      "name": "semantic_noise05_ft",
+      "type": "semantic",
+      "variant": "noise05",
+      "checkpoint": "outputs/semantic_comm_runs/semantic_comm_v1_channel_finetune/noise05/checkpoints/best_model.pth",
+      "description": "64x 8-bit semantic tensor with Gaussian channel noise after fine-tuning."
+    },
+    {
+      "name": "semantic_dropout10_ft",
+      "type": "semantic",
+      "variant": "dropout10",
+      "checkpoint": "outputs/semantic_comm_runs/semantic_comm_v1_channel_finetune/dropout10/checkpoints/best_model.pth",
+      "description": "64x 8-bit semantic tensor with 10% semantic feature dropout after fine-tuning."
+    }
+  ]
+}

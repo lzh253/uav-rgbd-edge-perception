@@ -1,0 +1,57 @@
+{
+  "run_name": "spatial_postprocess_ablation_v1",
+  "description": "Lightweight spatial post-processing ablation for path-planning safety after constrained path-aware threshold selection.",
+  "source_model_config": "configs/path_planning_checkpoint_selection.json",
+  "threshold_selection_csv": "outputs/path_aware_runs/constrained_path_aware_selection_v2/selection_strategy_comparison_v2.csv",
+  "threshold_strategy": "constrained_safety_5pp",
+  "splits": ["val", "test"],
+  "selection_split": "val",
+  "final_split": "test",
+  "include_oracle": false,
+  "image_size": 128,
+  "min_gt_component_pixels": 300,
+  "min_start_goal_distance": 32,
+  "connectivity": 8,
+  "corridor_radius": 2,
+  "max_samples_per_split": 0,
+  "seed": 20260519,
+  "postprocess_variants": [
+    {"name": "raw", "type": "none"},
+    {"name": "remove_small_64", "type": "remove_small_components", "min_component_pixels": 64},
+    {"name": "remove_small_128", "type": "remove_small_components", "min_component_pixels": 128},
+    {"name": "remove_small_256", "type": "remove_small_components", "min_component_pixels": 256},
+    {"name": "keep_largest", "type": "keep_largest_component"},
+    {"name": "open3", "type": "morph_open", "kernel_size": 3, "iterations": 1},
+    {
+      "name": "open3_remove64",
+      "type": "pipeline",
+      "steps": [
+        {"type": "morph_open", "kernel_size": 3, "iterations": 1},
+        {"type": "remove_small_components", "min_component_pixels": 64}
+      ]
+    },
+    {
+      "name": "component_conf_64_tplus05",
+      "type": "component_confidence",
+      "min_component_pixels": 64,
+      "min_mean_probability_margin": 0.05
+    }
+  ],
+  "selection_metric": "planning_safety_utility",
+  "selection_tie_breakers": [
+    "negative_collision_rate_among_found",
+    "negative_mean_path_corridor_fp_rate_found",
+    "mean_map_iou"
+  ],
+  "path_aware_score": {
+    "definition": "planning_safety_utility - 0.20 * collision_rate_among_found - 0.50 * mean_path_corridor_fp_rate_found - 0.20 * mean_collision_bridge_component_area_ratio_image_found - 0.10 * start_or_goal_blocked_rate",
+    "collision_rate_penalty_weight": 0.20,
+    "corridor_fp_rate_penalty_weight": 0.50,
+    "collision_bridge_area_penalty_weight": 0.20,
+    "blocked_rate_penalty_weight": 0.10
+  },
+  "outputs": {
+    "root": "outputs/path_aware_runs",
+    "report": "outputs/path_aware_runs/spatial_postprocess_ablation_v1/summary.md"
+  }
+}

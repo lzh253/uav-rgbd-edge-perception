@@ -1,0 +1,29 @@
+{
+  "run_name": "resolution_diagnostic_v1",
+  "description": "Topology and resolution-transfer analysis using validation-selected checkpoints; this is not a retrained high-resolution benchmark.",
+  "protocol_config": "configs/experiment_protocol.json",
+  "baseline_config": "configs/baseline_training_long_cuda_safe.json",
+  "semantic_config": "configs/semantic_comm_training.json",
+  "source_planning_config": "configs/path_planning_threshold_sweep.json",
+  "output_root": "outputs/resolution_diagnostic_v1",
+  "report_path": "outputs/resolution_diagnostic_v1/summary.md",
+  "device": "cuda",
+  "seed": 20260522,
+  "resolutions": [128, 256],
+  "reference_resolution": 128,
+  "thresholds": [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75],
+  "selection_split": "val",
+  "final_split": "test",
+  "selection_primary_metric": "planning_safety_utility",
+  "max_samples_per_split": 0,
+  "connectivity": 8,
+  "base_min_gt_component_pixels": 300,
+  "base_min_start_goal_distance": 32,
+  "models": ["rgb_baseline", "rgbd_concat_baseline", "semantic_clean"],
+  "figure_case_count": 4,
+  "notes": [
+    "For 256x256, the minimum connected-road component and start-goal distance are scaled from the 128x128 planning protocol.",
+    "The 256x256 model evaluation reuses 128x128-trained fully convolutional checkpoints and should be interpreted as a diagnostic transfer check, not as a fully retrained high-resolution benchmark.",
+    "The topology analysis compares the 256x256 ground-truth road mask with a 128x128 mask upsampled back to 256x256 to quantify road-geometry loss caused by coarse semantic messaging."
+  ]
+}

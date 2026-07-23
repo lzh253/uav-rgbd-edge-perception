@@ -1,0 +1,40 @@
+{
+  "run_name": "constrained_path_aware_selection_v2",
+  "description": "Constrained path-aware threshold selection using step-14 spatial diagnostics without rerunning neural inference.",
+  "source_spatial_summary_csv": "outputs/path_aware_runs/path_aware_spatial_diagnostics_v1/spatial_threshold_summary.csv",
+  "source_strategy_comparison_csv": "outputs/path_aware_runs/path_aware_spatial_diagnostics_v1/selection_strategy_comparison.csv",
+  "selection_split": "val",
+  "final_split": "test",
+  "reference_strategies": ["fixed_0_50", "pixel_iou_transfer", "safety_utility", "path_aware"],
+  "constrained_strategies": [
+    {
+      "name": "constrained_safety_tie",
+      "description": "Use only validation safety-optimal thresholds, then spatial risk as tie-breaker.",
+      "absolute_safety_tolerance": 0.0,
+      "relative_safety_floor": 1.0
+    },
+    {
+      "name": "constrained_safety_2pp",
+      "description": "Allow validation safety utility to fall by at most 0.02 while minimizing spatial risk.",
+      "absolute_safety_tolerance": 0.02,
+      "relative_safety_floor": 0.95
+    },
+    {
+      "name": "constrained_safety_5pp",
+      "description": "Allow validation safety utility to fall by at most 0.05 while minimizing spatial risk.",
+      "absolute_safety_tolerance": 0.05,
+      "relative_safety_floor": 0.90
+    }
+  ],
+  "spatial_risk_score": {
+    "definition": "0.45 * collision_rate_among_found + 0.35 * mean_path_corridor_fp_rate_found + 0.10 * mean_collision_bridge_component_area_ratio_image_found + 0.10 * start_or_goal_blocked_rate",
+    "collision_rate_weight": 0.45,
+    "corridor_fp_rate_weight": 0.35,
+    "collision_bridge_area_weight": 0.10,
+    "blocked_rate_weight": 0.10
+  },
+  "outputs": {
+    "root": "outputs/path_aware_runs",
+    "report": "outputs/path_aware_runs/constrained_path_aware_selection_v2/summary.md"
+  }
+}

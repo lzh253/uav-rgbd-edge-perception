@@ -1,0 +1,37 @@
+{
+  "run_name": "path_aware_spatial_diagnostics_v1",
+  "description": "Path-aware threshold selection and spatial false-positive connectivity diagnostics for traversability planning.",
+  "source_model_config": "configs/path_planning_checkpoint_selection.json",
+  "calibration_threshold_transfer_csv": "outputs/calibration_runs/probability_calibration_v1/val_selected_threshold_transfer.csv",
+  "splits": ["val", "test"],
+  "image_size": 128,
+  "thresholds": [0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75],
+  "selection_split": "val",
+  "final_split": "test",
+  "include_oracle": false,
+  "min_gt_component_pixels": 300,
+  "min_start_goal_distance": 32,
+  "connectivity": 8,
+  "corridor_radius": 2,
+  "max_samples_per_split": 0,
+  "seed": 20260518,
+  "path_aware_score": {
+    "definition": "planning_safety_utility - 0.20 * collision_rate_among_found - 0.50 * mean_path_corridor_fp_rate_found - 0.20 * mean_collision_bridge_component_area_ratio_image_found - 0.10 * start_or_goal_blocked_rate",
+    "collision_rate_penalty_weight": 0.20,
+    "corridor_fp_rate_penalty_weight": 0.50,
+    "collision_bridge_area_penalty_weight": 0.20,
+    "blocked_rate_penalty_weight": 0.10
+  },
+  "preview_models": [
+    "semantic_clean_step4_single_best",
+    "semantic_original_recipe_seed20260518_best",
+    "semantic_stable_v2_lr2e4_clip10_seed20260517_best",
+    "rgb_baseline_best"
+  ],
+  "max_collision_previews_total": 16,
+  "max_collision_previews_per_model": 4,
+  "outputs": {
+    "root": "outputs/path_aware_runs",
+    "report": "outputs/path_aware_runs/path_aware_spatial_diagnostics_v1/summary.md"
+  }
+}
